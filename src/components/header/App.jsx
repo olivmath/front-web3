@@ -28,7 +28,11 @@ export default function App() {
         <div className="describe">
         Me mande um 👋 pela Blockchain.
         </div>
-
+        <a
+        className="network"
+        href="https://goerli.net/"
+        target="_blank"
+        >Görli Testnet Ethereum Network</a>
         {
           !userAddress &&
           <button className="callButton" onClick={connectWallet}>

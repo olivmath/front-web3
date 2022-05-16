@@ -31,14 +31,19 @@
   font-weight: 600;
 }
 
-.link {
+.link, .network {
   text-align: center;
   text-decoration: none;
   color: #3083ff;
   font-weight: 600;
 }
 
-.link:hover {
+.network {
+  font-size: 13px;
+  color: #ff4830;
+}
+
+.link:hover, .network:hover {
   text-align: center;
   color: #1a4e9d;
 }
