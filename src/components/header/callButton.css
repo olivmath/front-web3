@@ -1,0 +1,23 @@
+
+.callButton {
+  cursor: pointer;
+  margin-top: 16px;
+  width: 50%;
+  background: white;
+  color: #153B74;
+  padding: 8px;
+  border: 3px solid #153B74;
+  border-radius: 5px;
+}
+
+.callButton:hover {
+  border: 3px solid #153B74;
+  background: #153B74;
+  color: white;
+  transition: 0.2s;
+}
+
+.callButton:active {
+  transition: 0.1s;
+  transform: translateY(4px);
+}

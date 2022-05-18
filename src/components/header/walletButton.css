@@ -1,0 +1,20 @@
+
+.walletButton {
+  cursor: pointer;
+  margin-top: 16px;
+  padding: 8px;
+  border-radius: 5px;
+  border: 3px solid #153B74;
+  background: #153B74;
+  color: white;
+}
+
+.walletButton:hover {
+  transition: 0.1s;
+  transform: translateY(-2px);
+}
+
+.walletButton:active {
+  transition: 0.1s;
+  transform: translateY(4px);
+}

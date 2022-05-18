@@ -1,13 +1,21 @@
 import { callCounterContract } from "../../services/CallCounter"
 import React, { useState } from "react";
+
 import './App.css';
+import './callButton.css';
+import './walletButton.css';
+
+
 
 export default function App() {
-  const [userAddress, setUserAddress] = useState("")
+  const [wallet, setWallet] = useState("🦊 Connectar sua carteira")
+  const [_, setUserAddress] = useState("")
+  const [addr, setAddr] = useState([])
 
   const connectWallet = async () => {
     const listUserAddress =  await window.ethereum.request({method: "eth_requestAccounts"})
-    console.info(`✅ Wallet ${listUserAddress[0]} connected!`)
+    setWallet(`✅ ${listUserAddress[0]} connected!`)
+    setAddr(await callCounterContract.getCallers())
     setUserAddress(listUserAddress[0])
   }
 
@@ -28,17 +36,16 @@ export default function App() {
         <div className="describe">
         Me mande um 👋 pela Blockchain.
         </div>
+
         <a
         className="network"
         href="https://goerli.net/"
         target="_blank"
         >Görli Testnet Ethereum Network</a>
-        {
-          !userAddress &&
-          <button className="callButton" onClick={connectWallet}>
-            <div className="describe">🦊 Connectar sua carteira</div>
-          </button>
-        }
+
+        <button className="walletButton" onClick={connectWallet}>
+          <div className="describe">{wallet}</div>
+        </button>
 
         <button className="callButton" onClick={
           async () => await callCounterContract.call({ gasLimit: 300000 })
