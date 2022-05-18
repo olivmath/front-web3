@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import './App.css';
 import './callButton.css';
 import './walletButton.css';
-
+import Calls from "../body/Calls";
 
 
 export default function App() {
@@ -20,6 +20,7 @@ export default function App() {
   }
 
   return (
+    <>
     <div className="headerMainContainer">
 
       <div className="headerDataContainer">
@@ -54,5 +55,7 @@ export default function App() {
         </button>
       </div>
     </div>
+    <Calls address={addr} update={setAddr}/>
+    </>
   );
 }

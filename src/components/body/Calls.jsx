@@ -6,21 +6,20 @@ import "./Calls.css"
 
 const count = (k, array) => array.filter(v => v==k).length
 
-export default function Calls() {
-  const [callers, setCallers] = useState([])
+export default function Calls({address, update}) {
 
   useEffect(async () => {
     const listener = async (item) => {
-      setCallers([item, ...await callCounterContract.getCallers()])
+      update([item, ...await callCounterContract.getCallers()])
     }
     callCounterContract.on("newCall", listener);
   }, [])
 
   return (
     <div className="callMainContainer">
-      <h3>Já me chamaram {callers.length} vezes!</h3>
+      <h3>Já me chamaram {address.length} vezes!</h3>
       {
-        [...new Set(callers)].map((addr, index) => {
+        [...new Set(address)].map((addr, index) => {
           if (!addr) return
           return (
             <div className="caller" key={index}>
@@ -28,7 +27,7 @@ export default function Calls() {
             className="link"
             href={`https://goerli.etherscan.io/address/${addr}`}
             target="_blank"
-            >{addr}</a>&nbsp;me chamou {count(addr, callers)} vezes !
+            >{addr}</a>&nbsp;me chamou {count(addr, address)} vezes !
             </div>
           )
         }).reverse()
