@@ -14,7 +14,7 @@ export default function App() {
 
   const connectWallet = async () => {
     const listUserAddress =  await window.ethereum.request({method: "eth_requestAccounts"})
-    setWallet(`✅ ${listUserAddress[0]} connected!`)
+    setWallet(`✅ ${listUserAddress[0]}`)
     setAddr(await callCounterContract.getCallers())
     setUserAddress(listUserAddress[0])
   }
