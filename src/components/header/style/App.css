@@ -39,11 +39,24 @@
 }
 
 .network {
-  font-size: 13px;
-  color: #ff4830;
+  border: 5px;
+  background: #ef2a2a;
+  border-radius: 5px;
+  margin-top: 16px;
+  cursor: pointer;
+  color: white;
+  padding: 8px;
+  width: 50%;
 }
 
-.link:hover, .network:hover {
-  text-align: center;
-  color: #1a4e9d;
+
+
+.network:hover {
+  background: #3083ff;
+  transition: 0.2s;
+}
+
+.network:active {
+  transform: translateY(4px);
+  transition: 0.2s;
 }

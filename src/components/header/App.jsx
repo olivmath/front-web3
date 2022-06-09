@@ -1,9 +1,9 @@
 import { callCounterContract } from "../../services/CallCounter"
 import React, { useState } from "react";
 
-import './App.css';
-import './callButton.css';
-import './walletButton.css';
+import './style/App.css';
+import './style/callButton.css';
+import './style/walletButton.css';
 import Calls from "../body/Calls";
 
 
@@ -19,6 +19,17 @@ export default function App() {
     setUserAddress(listUserAddress[0])
   }
 
+  const network = parseInt(window.ethereum.networkVersion) == 5
+
+  const changeNetwork = async () => {
+    if (!network) {
+      await ethereum.request({
+        method: 'wallet_switchEthereumChain',
+        params: [{ chainId: '0x5' }],
+      })
+      window.location.reload(false)
+    }
+  }
   return (
     <>
     <div className="headerMainContainer">
@@ -38,21 +49,30 @@ export default function App() {
         Me mande um 👋 pela Blockchain.
         </div>
 
-        <a
-        className="network"
-        href="https://goerli.net/"
-        target="_blank"
-        >Görli Testnet Ethereum Network</a>
 
-        <button className="walletButton" onClick={connectWallet}>
-          <div className="describe">{wallet}</div>
+        {
+        !network &&
+        <button
+          className="network"
+          onClick={changeNetwork}
+        >📡 Add Goerli Ethereum Network
         </button>
+        }
 
-        <button className="callButton" onClick={
-          async () => await callCounterContract.call({ gasLimit: 300000 })
-        }>
-          <h2>👋 Olá!</h2>
-        </button>
+        {
+          network &&
+          <>
+            <button className="walletButton" onClick={connectWallet}>
+              <div className="describe">{wallet}</div>
+            </button>
+
+            <button className="callButton" onClick={
+              async () => await callCounterContract.call({ gasLimit: 300000 })
+            }>
+              <h2>👋 Olá!</h2>
+            </button>
+        </>
+        }
       </div>
     </div>
     <Calls address={addr} update={setAddr}/>
